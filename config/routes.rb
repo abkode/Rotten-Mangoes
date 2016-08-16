@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
 
-  get 'users/new'
+  get 'sessions/create'
 
-  get 'users/create'
+# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+ 	get 'users/new'
+	get 'users/create'
 
 	resources :movies
 	resources :users, only: [:new, :create]
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+	resources :sessions, only: [:new, :create]
+  
 end

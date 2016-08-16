@@ -1,0 +1,8 @@
+<% if current_user && current_user.admin?  %>
+  <% @user.each do |user| %>
+	<h1> <%= user.full_name %></h1>
+  <% end %>
+	
+<% else %>
+  <h1> Not allowed! </h1>
+<% end %>

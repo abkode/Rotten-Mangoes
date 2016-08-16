@@ -1,8 +1,8 @@
 <%= link_to "Back to all movies", movies_path %><br/>
 
-  <% unless @movie.image.blank? %>
+<% unless @movie.image.blank? %>
   <%= image_tag @movie.image_url, :style => "width:500px; Hieght:400px" %>
-  <% end %>
+<% end %>
 
 
 <h2><%= @movie.title %> (<%= link_to "edit", edit_movie_path(@movie) %>, <%= link_to "delete", movie_path(@movie), method: :delete, confirm: "You sure?" %>)</h2>

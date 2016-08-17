@@ -1,7 +1,8 @@
 class Admin::UsersController < ApplicationController
 	before_filter :restrict_access
-	def index
-	  	@user = User.all
+	
+	def index	
+	  	@users = User.all.page(params[:page]).per(5)
 	end
 
 	def new

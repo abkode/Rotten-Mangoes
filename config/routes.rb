@@ -20,10 +20,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'movies#index'
 
-  # root to: 'admin#index'
-  
-  # match 'admin', to: 'admin/user#index', via: [:get, :post]
-
   namespace :admin do
     resources :users, only: [:index, :new, :create]
 

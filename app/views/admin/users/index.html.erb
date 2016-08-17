@@ -1,8 +1,15 @@
+
 <% if current_user && current_user.admin?  %>
-  <% @user.each do |user| %>
-	<h1> <%= user.full_name %></h1>
-  <% end %>
-	
-<% else %>
+	<% @users.each do |user| %>
+		<%=user.firstname %>
+		<br />
+		
+ 	<% end %>
+ 	<%= paginate @users %>
+
+ <% else %>
   <h1> Not allowed! </h1>
 <% end %>
+
+
+

@@ -13,15 +13,26 @@ class Movie < ApplicationRecord
   validates :description,
     presence: true
 
-  # validates :poster_image_url,
-  #   presence: true
-
   validates :release_date,
     presence: true
 
   validate :release_date_is_in_the_past
 
   mount_uploader :image, ImageUploader
+
+  scope :title, -> (title) { where("title like ?", "#{title}%")}
+  scope :director, -> (director) { where("director like ?", "#{director}%")}
+
+  def self.duration(duration)
+    case duration
+      when "Under 90 minutes"
+        where("runtime_in_minutes < 90")
+      when "Between 90 and 120 minutes"
+        where("runtime_in_minutes Between 90 AND 120")
+      when "Over 120 minutes"  
+        where("runtime_in_minutes > 120")
+    end
+  end  
 
   def review_average
     if reviews.size > 0

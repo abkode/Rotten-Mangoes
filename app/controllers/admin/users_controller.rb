@@ -23,9 +23,7 @@ class Admin::UsersController < ApplicationController
 
 		if @user.save
 		    session[:user_id] = @user.id # auto log in
-		   	# redirect_to movies_path, notice: "Welcome aboard, #{@user.firstname}!"
 		   	render :index
-		   	# format.html { redirect_to action: :index}
 		else
 		    render :new
 		end
@@ -39,6 +37,12 @@ class Admin::UsersController < ApplicationController
 	  	else
 	  	  render :edit
 	  	end
+	end
+
+	def destroy
+	  	@user = User.find(params[:id])
+	  	@user.destroy
+		redirect_to admin_users_path
 	end
 
 	protected

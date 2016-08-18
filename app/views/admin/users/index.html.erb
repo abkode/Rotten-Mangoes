@@ -1,15 +1,43 @@
 
-<% if current_user && current_user.admin?  %>
-	<% @users.each do |user| %>
-		<%=user.firstname %>
-		<br />
-		
- 	<% end %>
- 	<%= paginate @users %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h1>Rotten Mangoes - Admin page</h1>
+  </div>
+  <%= link_to "Add New User", new_admin_user_path, :class => "btn btn-success" %>
+</div>
 
- <% else %>
+<table class="table" width="300px">
+  <thead>
+    <tr class="active" >
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Is Admin?</th>
+      <th> </th>
+    </tr>
+  </thead>
+<% if current_user && current_user.admin?  %>
+<tbody>
+	<% @users.each do |user| %>
+      <tr style="text-align:left">
+        <td><%= user.firstname %></td>
+        <td><%= user.lastname %></td>
+        <td><%= user.email %></td>
+        <td><%= user.admin %></td>
+        <td><%= link_to 'Edit', edit_admin_user_path(user) %> </td>
+      </tr>
+
+    <% end %>
+
+  </tbody>
+
+</table>
+<%= paginate @users %>
+<% else %>
+  </table>
   <h1> Not allowed! </h1>
 <% end %>
+
 
 
 

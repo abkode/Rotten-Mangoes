@@ -1,0 +1,44 @@
+<% if @user.errors.any? %>
+  <div>
+    <%= pluralize(@user.errors.count, "error") %> prevented this movie from being submitted:
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= form_for @user do |f| %>
+
+
+  <div>
+    <%= f.label :firstname %><br>
+    <%= f.text_field :firstname %>
+  </div>
+  <br>
+  <div>
+    <%= f.label :lastname %><br>
+    <%= f.text_field :lastname %>
+  </div>
+  <br>
+  <div>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <br>
+  <div class="field">
+    <%= f.label "Is Admin?" %>
+    <%= f.check_box :admin %><br><br>
+  </div>
+
+   <div class="field">
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+  </div>
+<br>
+  <div>
+    <%= f.submit "Submit" %> 
+  </div>
+<% end %>

@@ -11,12 +11,19 @@
 <div id="main_div">
 
 <%= form_tag(nil, method: 'get') do %>
-  <p><%= text_field_tag(:title_q, nil, {placeholder: 'Search By title'}) %>
-  <%= text_field_tag(:director_q, nil, {placeholder: 'Search by director'}) %>
+  <p>
+    
+
+  <%= text_field_tag(:search, nil, {placeholder: "Search by moive or director"}) %>
   <%= select_tag(:duration_q, "<option> </option><option>Under 90 minutes</option><option>Between 90 and 120 minutes</option><option>Over 120 minutes</option>".html_safe) %>
+
   <%= submit_tag('Search') %></p>
 <% end %>
 
-<%= render 'movie' %>
+<% if @movies.present? %>
+  <%= render 'movie' %>
+<% else %>
+  <p>There are no movies or directors containing the term(s) "<%= params[:search] %>".</p>
+<% end %>
 
 </div>

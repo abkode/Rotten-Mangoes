@@ -20,8 +20,13 @@ class Movie < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  scope :title, -> (title) { where("title like ?", "#{title}%")}
-  scope :director, -> (director) { where("director like ?", "#{director}%")}
+  # scope :title, -> (title) { where("title like ?", "#{title}%")}
+  # scope :director, -> (director) { where("director like ?", "#{director}%")}
+
+  def self.search(search)
+    where("title LIKE ? OR director LIKE ?", "%#{search}%", "%#{search}%")
+    # where("title LIKE ?", "%#{search}%").where("director LIKE ?", "%#{search}%")
+  end
 
   def self.duration(duration)
     case duration
@@ -42,10 +47,10 @@ class Movie < ApplicationRecord
 
   protected
 
-  def release_date_is_in_the_past
-    if release_date.present?
-      errors.add(:release_date, "should be in the past") if release_date > Date.today
+    def release_date_is_in_the_past
+      if release_date.present?
+        errors.add(:release_date, "should be in the past") if release_date > Date.today
+      end
     end
-  end
 
 end
